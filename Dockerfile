@@ -1,4 +1,4 @@
-from python:3-alpine
+FROM python:alpine
 
 ENV \
     UID=1000 \
