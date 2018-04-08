@@ -24,11 +24,14 @@ if ! test -f /var/lib/supysonic/supysonic.db; then
     echo Adding and scanning Library in /media
     supysonic-cli folder add Library /media
     supysonic-cli folder scan supysonic:latestLibrary
+
+    echo Changing owner of config dir
+    chown -R supysonic:supysonic ~supysonic
 fi
 
 # run uwsgi
-uwsgi --http-socket :8080 \
-      --wsgi-file /supysonic-master/cgi-bin/supysonic.wsgi \
-      --master \
-      --processes 4 --threads 2 \
-      --uid $UID --gid $GID
+exec uwsgi --http-socket :8080 \
+           --wsgi-file /supysonic-master/cgi-bin/supysonic.wsgi \
+           --master \
+           --processes 4 --threads 2 \
+           --uid $UID --gid $GID
