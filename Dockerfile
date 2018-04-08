@@ -8,10 +8,19 @@ ENV \
 ADD https://github.com/spl0k/supysonic/archive/master.zip /supysonic.zip
 ADD init.sh /init.sh
 
-RUN apk --no-cache add gcc musl-dev zlib-dev jpeg-dev libjpeg-turbo sqlite uwsgi uwsgi-python; \
+RUN apk --no-cache add libjpeg-turbo sqlite zlib jpeg pcre \
+                       gcc musl-dev zlib-dev jpeg-dev pcre-dev linux-headers; \
     unzip supysonic.zip; \
-    pip install ./supysonic-master; \
-    cp /supysonic-master/schema/sqlite.sql /usr/local/lib/python3.6/site-packages/supysonic/; \
-    adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic;
+    pip install uwsgi ./supysonic-master; \
+    adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic; \
+    echo ok; \
+    rm supysonic.zip; \
+    apk del gcc musl-dev zlib-dev jpeg-dev linux-headers pcre-dev; \
+    rm -rf /var/cache/apk/*;
 
-CMD /init.sh
+VOLUME [ \
+    "/media", \
+    "/var/lib/supysonic" \
+]
+
+CMD "./init.sh"
