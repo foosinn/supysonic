@@ -9,7 +9,7 @@ EOF
 # create database if required
 if ! test -f /var/lib/supysonic/supysonic.db; then
     echo Creating intial database
-    sqlite3 /var/lib/supysonic/supysonic.db < /usr/local/lib/python3.6/site-packages/supysonic/sqlite.sql
+    sqlite3 /var/lib/supysonic/supysonic.db < /supysonic-master/schema/sqlite.sql
 
     if test -f /run/secrets/supysonic; then
         password=$(cat /run/secrets/supysonic)
