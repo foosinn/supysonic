@@ -9,4 +9,19 @@ Currently only supports local sqlite as storage.
 * Be sure to add /var/lib/supysonic as a volume to store passwords and your music databse
 * You can specify a own password by using a docker secred named `supysonic`
 * If you do not specify a secret you will see one in the logs
+* The webserver runs on port `8080`
 
+## Example for docker-compose
+
+Here is a simple example for docker-compose and Traefik.
+
+```yaml
+  supysonic:
+    image: foosinn/supysonic
+    volumes:
+      - "/tank/Musik:/media:ro"  # add your music folder hiere
+      - "/opt/supysonic:/var/lib/supysonic"  # config folder
+    labels:
+      - "traefik.frontend.rule=Host: musik.example.com"
+      - "traefik.port=8080"
+```
