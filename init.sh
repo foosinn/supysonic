@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # create config
-cat > /var/lib/supysonic/.supysonic <<EOF
+cat > /etc/supysonic <<EOF
 [base]
 database_uri = sqlite:////var/lib/supysonic/supysonic.db
 EOF
