@@ -15,4 +15,3 @@ RUN apk --no-cache add gcc musl-dev zlib-dev jpeg-dev libjpeg-turbo sqlite uwsgi
     adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic;
 
 CMD /init.sh
-supysonic:latest
