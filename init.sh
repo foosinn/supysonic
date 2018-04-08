@@ -26,8 +26,9 @@ if ! test -f /var/lib/supysonic/supysonic.db; then
     supysonic-cli folder scan supysonic:latestLibrary
 fi
 
+# run uwsgi
 uwsgi --http-socket :8080 \
       --wsgi-file /supysonic-master/cgi-bin/supysonic.wsgi \
       --master \
       --processes 4 --threads 2 \
-      --uid $UID --pid $PID
+      --uid $UID --gid $GID
