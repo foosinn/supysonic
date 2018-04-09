@@ -4,14 +4,15 @@ Just a simple Docker container that gets rebuild on every python update.
 
 Currently only supports local sqlite as storage.
 
-## Attention
+### Attention
 
-* Be sure to add /var/lib/supysonic as a volume to store passwords and your music databse
+* Be sure to add `/var/lib/supysonic` as a volume to store passwords and your music databse
+* Add your music in `/media` as a volume
 * You can specify a own password by using a docker secred named `supysonic`
 * If you do not specify a secret you will see one in the logs
 * The webserver runs on port `8080`
 
-## Example for docker-compose
+### Example for docker-compose
 
 Here is a simple example for docker-compose and Traefik.
 
