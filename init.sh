@@ -14,7 +14,8 @@ if ! test -f /var/lib/supysonic/supysonic.db; then
     if test -f /run/secrets/supysonic; then
         password=$(cat /run/secrets/supysonic)
     else
-        password=$(tr -dc '[:alnum:]' < /dev/urandom | head -c 16)
+        until [ ${len=0} -gt 12 ]; do len=$(( $RANDOM % 24 )); done
+        password=$(tr -dc '[:alnum:]' < /dev/urandom | head -c $len)
         echo Generated password: $password
     fi
 
