@@ -36,7 +36,7 @@ pip install /supysonic-master
 
 # run watcher in background, if not disabled
 if [ "$RUN_WATCHER" == "true" ]; then
-    ( while sleep 1; do supysonic-watcher; done ) &
+    sudo -u supysonic -g supysonic sh -c "while sleep 1; do supysonic-watcher; done" &
 fi
 
 # run uwsgi
