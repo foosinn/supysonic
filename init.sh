@@ -7,6 +7,9 @@ database_uri = sqlite:////var/lib/supysonic/supysonic.db
 EOF
 
 # create database if required
+# create user
+adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic
+
 if ! test -f /var/lib/supysonic/supysonic.db; then
     echo Creating intial database
     sqlite3 /var/lib/supysonic/supysonic.db < /supysonic-master/schema/sqlite.sql

@@ -13,7 +13,6 @@ RUN apk --no-cache add libjpeg-turbo sqlite zlib jpeg pcre sudo \
                        gcc musl-dev zlib-dev jpeg-dev pcre-dev linux-headers && \
     unzip supysonic.zip && \
     pip install uwsgi ./supysonic-master && \
-    adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic && \
     echo ok && \
     rm supysonic.zip && \
     apk del gcc musl-dev zlib-dev jpeg-dev linux-headers pcre-dev && \
