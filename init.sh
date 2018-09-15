@@ -34,6 +34,11 @@ fi
 # see: https://github.com/spl0k/supysonic/blob/master/README.md#upgrading
 pip install /supysonic-master
 
+# run watcher in background, if not disabled
+if [ "$RUN_WATCHER" == "true" ]; then
+    ( while sleep 1; do supysonic-watcher; done ) &
+fi
+
 # run uwsgi
 exec uwsgi --http-socket :8080 \
            --wsgi-file /supysonic-master/cgi-bin/supysonic.wsgi \

@@ -2,7 +2,8 @@ FROM python:alpine
 
 ENV \
     UID=1000 \
-    GID=1000
+    GID=1000 \
+    RUN_WATCHER=true
 
 
 ADD https://github.com/spl0k/supysonic/archive/master.zip /supysonic.zip

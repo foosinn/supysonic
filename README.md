@@ -11,6 +11,7 @@ Currently only supports local sqlite as storage.
 * You can specify a own password by using a docker secred named `supysonic`
 * If you do not specify a secret you will see one in the logs
 * The webserver runs on port `8080`
+* If you want to disable the watcher use the `RUN_WATCHER` environment variable
 
 ### Example for docker-compose
 
