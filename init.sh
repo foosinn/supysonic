@@ -30,6 +30,10 @@ if ! test -f /var/lib/supysonic/supysonic.db; then
     chown -R supysonic:supysonic ~supysonic
 fi
 
+# update database
+# see: https://github.com/spl0k/supysonic/blob/master/README.md#upgrading
+pip install /supysonic-master
+
 # run uwsgi
 exec uwsgi --http-socket :8080 \
            --wsgi-file /supysonic-master/cgi-bin/supysonic.wsgi \
