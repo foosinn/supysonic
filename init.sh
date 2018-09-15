@@ -6,13 +6,13 @@ cat > /etc/supysonic <<EOF
 database_uri = sqlite:////var/lib/supysonic/supysonic.db
 EOF
 
-# create database if required
 # create user
 adduser -D -u $UID -g $GID -h /var/lib/supysonic supysonic
 
 if ! test -f /var/lib/supysonic/supysonic.db; then
+    # create database if required
     echo Creating intial database
-    sqlite3 /var/lib/supysonic/supysonic.db < /supysonic-master/schema/sqlite.sql
+    pip install /supysonic-master
 
     if test -f /run/secrets/supysonic; then
         password=$(cat /run/secrets/supysonic)
@@ -31,11 +31,11 @@ if ! test -f /var/lib/supysonic/supysonic.db; then
 
     echo Changing owner of config dir
     chown -R supysonic:supysonic ~supysonic
+else
+    # update database
+    # see: https://github.com/spl0k/supysonic/blob/master/README.md#upgrading
+    pip install /supysonic-master
 fi
-
-# update database
-# see: https://github.com/spl0k/supysonic/blob/master/README.md#upgrading
-pip install /supysonic-master
 
 # run watcher in background, if not disabled
 if [ "$RUN_WATCHER" == "true" ]; then
